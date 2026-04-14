@@ -22,7 +22,28 @@ openclaw-simple-setup/
 
 ---
 
-## ⚡ Quick Start (3 Commands)
+## ⚡ Quick Start
+
+### Untuk UserLAnd (Single Session) ⭐
+
+**Lihat:** [`USERLAND-QUICKSTART.md`](USERLAND-QUICKSTART.md)
+
+```bash
+# Quick setup (5 menit)
+sudo apt update && sudo apt install -y curl git nodejs npm
+curl -fsSL https://ollama.com/install.sh | sh
+npm install -g openclaw
+ollama pull llama3.2:1b
+
+# Start (pakai screen atau &)
+ollama serve > /tmp/ollama.log 2>&1 &
+openclaw gateway start > /tmp/openclaw.log 2>&1 &
+
+# Check
+openclaw status
+```
+
+### Untuk Linux Desktop (Multi-Session)
 
 ### 1. Download & Run Setup
 

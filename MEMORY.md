@@ -10,5 +10,7 @@ _Curated memories that persist across sessions._
 - User name: aku (username: mybadmoood)
 - Session started via /start command
 - Skill permanent-memory created for cross-session memory
+- Skill openclaw-simple-setup created for UserLAnd/Android deployment
+- User uses UserLAnd (Ubuntu on Android)
 
 ---
