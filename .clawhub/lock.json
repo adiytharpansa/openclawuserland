@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "skills": {
+    "autonomous-execution": {
+      "version": "1.1.0",
+      "installedAt": 1776140000090
+    },
+    "elite-longterm-memory": {
+      "version": "1.2.3",
+      "installedAt": 1776140140370
+    },
+    "in-depth-research": {
+      "version": "1.0.0",
+      "installedAt": 1776140145107
+    },
+    "tool-governance": {
+      "version": "2.4.0",
+      "installedAt": 1776140162752
+    },
+    "ai-agent-helper": {
+      "version": "1.0.0",
+      "installedAt": 1776140167182
+    },
+    "summarize-pro": {
+      "version": "1.0.0",
+      "installedAt": 1776140647574
+    },
+    "planning-with-files": {
+      "version": "2.26.1",
+      "installedAt": 1776140651844
+    },
+    "web-browsing": {
+      "version": "1.0.0",
+      "installedAt": 1776140655566
+    },
+    "auto-workflow": {
+      "version": "1.0.0",
+      "installedAt": 1776140663042
+    },
+    "explain-code": {
+      "version": "1.0.0",
+      "installedAt": 1776140667253
+    },
+    "business-writing": {
+      "version": "0.1.0",
+      "installedAt": 1776140671372
+    },
+    "code-quality": {
+      "version": "1.0.0",
+      "installedAt": 1776140675148
+    },
+    "human-writing": {
+      "version": "1.0.0",
+      "installedAt": 1776140740986
+    },
+    "web-content-fetcher": {
+      "version": "1.0.1",
+      "installedAt": 1776140748205
+    },
+    "code-review-fix": {
+      "version": "1.0.0",
+      "installedAt": 1776140755456
+    }
+  }
+}

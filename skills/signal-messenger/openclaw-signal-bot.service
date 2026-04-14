@@ -1,0 +1,20 @@
+[Unit]
+Description=OpenClaw Signal Bot
+After=network.target
+
+[Service]
+Type=simple
+User=%USER%
+WorkingDirectory=/path/to/openclaw/workspace/skills/signal-messenger
+Environment="SIGNAL_PHONE_NUMBER=+6285745115673"
+ExecStart=/usr/bin/python3 /path/to/openclaw/workspace/skills/signal-messenger/signal-bot.py
+Restart=always
+RestartSec=10
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=openclaw-signal-bot
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,36 @@
+{
+  "auto_routing": {
+    "enabled": true,
+    "fallback_provider": "serper",
+    "confidence_threshold": 0.3,
+    "disabled_providers": []
+  },
+  "serper": {
+    "api_key": "b98a54410e39171ace3c955103256ef85060d75e",
+    "country": "us",
+    "language": "en"
+  },
+  "tavily": {
+    "api_key": "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",
+    "depth": "advanced"
+  },
+  "querit": {
+    "api_key": ""
+  },
+  "exa": {
+    "api_key": "de58bc2d-843d-4b75-a4b1-e7274a8dd69a",
+    "type": "neural"
+  },
+  "perplexity": {
+    "api_key": ""
+  },
+  "you": {
+    "api_key": "",
+    "country": "US",
+    "include_news": true
+  },
+  "searxng": {
+    "instance_url": "",
+    "engines": ["google", "bing"]
+  }
+}
