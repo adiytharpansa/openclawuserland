@@ -11,6 +11,7 @@ _Curated memories that persist across sessions._
 - Session started via /start command
 - Skill permanent-memory created for cross-session memory
 - Skill openclaw-simple-setup created for UserLAnd/Android deployment
-- User uses UserLAnd (Ubuntu on Android)
+- User uses UserLAnd (Ubuntu on Android) - SINGLE SESSION ONLY
+- Added start-openclaw.sh and save-state.sh for UserLAnd workflow
 
 ---
