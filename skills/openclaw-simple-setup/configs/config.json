@@ -1,0 +1,54 @@
+{
+  "models": {
+    "default": "ollama/llama3.2",
+    "fallbacks": [
+      "ollama/gemma3:27b",
+      "ollama/qwen2.5:7b",
+      "openrouter/meta-llama/llama-3-8b-instruct:free"
+    ],
+    "ollama": {
+      "baseUrl": "http://localhost:11434",
+      "apiKey": ""
+    },
+    "openrouter": {
+      "apiKey": "sk-or-YOUR_KEY_HERE",
+      "siteUrl": "https://your-site.com",
+      "siteName": "OpenClaw"
+    },
+    "openai": {
+      "apiKey": "sk-YOUR_KEY_HERE",
+      "baseUrl": "https://api.openai.com/v1"
+    }
+  },
+  "gateway": {
+    "port": 3000,
+    "host": "0.0.0.0",
+    "plugins": {
+      "entries": {
+        "telegram": {
+          "config": {
+            "botToken": "${TELEGRAM_BOT_TOKEN}"
+          }
+        },
+        "signal": {
+          "config": {
+            "phoneNumber": "+628123456789",
+            "dbPath": "/home/user/.local/share/signal-cli"
+          }
+        }
+      }
+    }
+  },
+  "workspace": {
+    "path": "~/.openclaw/workspace",
+    "skills": ["git", "web-browsing", "summarize-pro", "permanent-memory"]
+  },
+  "hooks": {
+    "enabled": true,
+    "directory": "~/.openclaw/hooks"
+  },
+  "logging": {
+    "level": "info",
+    "file": "~/.openclaw/gateway.log"
+  }
+}
