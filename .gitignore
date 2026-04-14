@@ -1,0 +1,15 @@
+# OpenClaw Firebase Studio Config
+# Permanent workspace configuration
+
+.env
+.node_modules/
+*.log
+.DS_Store
+
+# OpenClaw sensitive files
+.openclaw/exec-approvals.json
+.openclaw/workspace/memory/*.md
+.openclaw/workspace/.env.local
+
+# Firebase Studio
+.idx/.cache/

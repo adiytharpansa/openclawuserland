@@ -2,6 +2,12 @@
 
 Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
 
+## 🔑 API Keys & Credentials
+
+### Firebase (Maton)
+- **API Key:** Configured ✅
+- **Connection:** Setup di https://ctrl.maton.ai/connections
+
 ## What Goes Here
 
 Things like:
