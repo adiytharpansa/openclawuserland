@@ -20,6 +20,14 @@ echo "╚═══════════════════════�
 echo -e "${NC}"
 echo ""
 
+# Pre-check: Install Node.js if needed
+echo -e "${YELLOW}Checking prerequisites...${NC}"
+if ! command -v npm &> /dev/null; then
+    echo -e "${GREEN}[0/5] Installing Node.js & npm...${NC}"
+    sudo apt update -qq && sudo apt install -y -qq nodejs npm
+    echo -e "${GREEN}       ✓ Done${NC}"
+fi
+
 # Step 1: Install OpenClaw
 echo -e "${GREEN}[1/4] Installing OpenClaw...${NC}"
 if npm install -g openclaw --silent 2>/dev/null; then
