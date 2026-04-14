@@ -1,6 +1,44 @@
-# 🚀 OpenClaw Simple Setup
+# 🦀 OpenClaw Simple Setup
 
-**Install OpenClaw dalam 1 command!** Untuk UserLAnd/Android/Linux.
+**Install OpenClaw dalam 1 MENIT!** Untuk UserLAnd/Android/Linux.
+
+---
+
+## ⚡ PILIH INSTALLER
+
+### 🌩️ CLOUD (Recommended! Ringan!)
+**Tanpa AI lokal, 1 MENIT install!**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/YOUR-REPO/openclaw-simple-setup/main/INSTALL-CLOUD.sh | bash
+```
+
+**Keuntungan:**
+- ✅ 1 MENIT install
+- ✅ RAM < 500MB
+- ✅ HP kentang OK
+- ✅ Model pintar (8B+)
+- ❌ Butuh API key (free tier ada)
+
+**Docs:** [QUICKSTART-CLOUD.md](QUICKSTART-CLOUD.md)
+
+---
+
+### 💻 LOKAL (Full Offline)
+**AI lokal, 5 MENIT install**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/YOUR-REPO/openclaw-simple-setup/main/INSTALL.sh | bash
+```
+
+**Keuntungan:**
+- ✅ Gratis total
+- ✅ Full offline
+- ✅ No API key
+- ❌ RAM 2-4GB
+- ❌ 5-10 MENIT install
+
+**Docs:** [QUICKSTART.md](QUICKSTART.md)
 
 ---
 

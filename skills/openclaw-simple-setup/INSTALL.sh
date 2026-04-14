@@ -1,14 +1,13 @@
 #!/bin/bash
 # ┌──────────────────────────────────────────┐
-# │  OpenClaw ONE-CLICK INSTALL              │
-# │  Untuk UserLAnd/Android                  │
-# │  Copy-paste ini, tekan Enter, DONE!      │
+# │  🦀 OpenClaw INSTANT INSTALL             │
+# │  UserLAnd / Android - SUPER SIMPLE       │
+# │  Copy-paste, Enter, DONE!                │
 # └──────────────────────────────────────────┘
 
 set -e
 
 # Colors
-RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
@@ -17,38 +16,50 @@ NC='\033[0m'
 clear
 echo -e "${BLUE}"
 echo "╔══════════════════════════════════════════╗"
-echo "║   🚀 OpenClaw ONE-CLICK INSTALL          ║"
-echo "║   UserLAnd / Android / Linux             ║"
+echo "║   🦀 OpenClaw INSTANT INSTALL            ║"
+echo "║   UserLAnd / Android                     ║"
 echo "╚══════════════════════════════════════════╝"
 echo -e "${NC}"
+echo ""
 
-# Step 1: Install dependencies
-echo -e "${GREEN}[1/5] Installing dependencies...${NC}"
-sudo apt update -qq
-sudo apt install -y -qq curl git nodejs npm > /dev/null 2>&1
-echo -e "${GREEN}✓ Done${NC}"
-sleep 1
+# Quick check
+echo -e "${YELLOW}Checking system...${NC}"
+echo ""
 
-# Step 2: Install OpenClaw
-echo -e "${GREEN}[2/5] Installing OpenClaw...${NC}"
-npm install -g openclaw > /dev/null 2>&1
-echo -e "${GREEN}✓ OpenClaw installed${NC}"
-sleep 1
+# Step 1: OpenClaw
+if command -v openclaw &> /dev/null; then
+    echo -e "${GREEN}[1/4] ✓ OpenClaw already installed${NC}"
+else
+    echo -e "${GREEN}[1/4] Installing OpenClaw...${NC}"
+    if npm install -g openclaw > /tmp/openclaw-install.log 2>&1; then
+        echo -e "${GREEN}         ✓ OpenClaw installed${NC}"
+    else
+        echo -e "${RED}         ✗ OpenClaw install failed${NC}"
+        echo -e "${YELLOW}         Check: /tmp/openclaw-install.log${NC}"
+        exit 1
+    fi
+fi
 
-# Step 3: Install Ollama
-echo -e "${GREEN}[3/5] Installing Ollama...${NC}"
-curl -fsSL https://ollama.com/install.sh | sh > /dev/null 2>&1
-echo -e "${GREEN}✓ Ollama installed${NC}"
-sleep 1
+if command -v ollama &> /dev/null; then
+    echo -e "${GREEN}✓ Ollama already installed${NC}"
+else
+    echo -e "${GREEN}[2/4] Installing Ollama...${NC}"
+    curl -fsSL https://ollama.com/install.sh | bash
+    echo -e "${GREEN}✓ Done${NC}"
+fi
 
-# Step 4: Pull model
-echo -e "${GREEN}[4/5] Downloading AI model (this takes time)...${NC}"
-ollama pull llama3.2:1b > /dev/null 2>&1
-echo -e "${GREEN}✓ Model ready${NC}"
-sleep 1
+# Model check
+echo -e "${GREEN}[3/4] Checking AI model...${NC}"
+if ollama list 2>/dev/null | grep -q "llama3.2:1b"; then
+    echo -e "${GREEN}✓ Model ready${NC}"
+else
+    echo -e "${YELLOW}Downloading model (this takes time)...${NC}"
+    ollama pull llama3.2:1b
+    echo -e "${GREEN}✓ Model ready${NC}"
+fi
 
-# Step 5: Create config
-echo -e "${GREEN}[5/5] Creating config...${NC}"
+# Config
+echo -e "${GREEN}[4/4] Setting up config...${NC}"
 mkdir -p ~/.openclaw
 cat > ~/.openclaw/config.json << 'EOF'
 {
@@ -56,19 +67,17 @@ cat > ~/.openclaw/config.json << 'EOF'
   "gateway": {"port": 3000}
 }
 EOF
-echo -e "${GREEN}✓ Config created${NC}"
-sleep 1
+echo -e "${GREEN}✓ Config ready${NC}"
 
-# Download helper scripts
+# Helper scripts
 echo ""
-echo -e "${YELLOW}Downloading helper scripts...${NC}"
+echo -e "${YELLOW}Creating quick commands...${NC}"
 SCRIPT_DIR=~/openclaw
 mkdir -p "$SCRIPT_DIR"
 
-# start.sh
 cat > "$SCRIPT_DIR/start.sh" << 'SCRIPT'
 #!/bin/bash
-echo "🚀 Starting..."
+echo "🚀 Starting OpenClaw..."
 pkill -f "ollama serve" 2>/dev/null || true
 pkill -f "openclaw gateway" 2>/dev/null || true
 sleep 1
@@ -76,50 +85,41 @@ ollama serve > /tmp/ollama.log 2>&1 &
 sleep 2
 openclaw gateway start > /tmp/openclaw.log 2>&1 &
 sleep 2
-echo "✅ Ready!"
-openclaw status
+echo "✅ Ready! Chat via Telegram or run: openclaw"
 SCRIPT
-chmod +x "$SCRIPT_DIR/start.sh"
 
-# stop.sh
 cat > "$SCRIPT_DIR/stop.sh" << 'SCRIPT'
 #!/bin/bash
 echo "🛑 Stopping..."
-pkill -f "ollama serve"
-pkill -f "openclaw gateway"
+pkill -f "ollama serve" 2>/dev/null || true
+pkill -f "openclaw gateway" 2>/dev/null || true
 echo "✅ Stopped"
 SCRIPT
-chmod +x "$SCRIPT_DIR/stop.sh"
 
-# status.sh
 cat > "$SCRIPT_DIR/status.sh" << 'SCRIPT'
 #!/bin/bash
 echo "📊 Status:"
-echo ""
-echo "Ollama:"
-curl -s http://localhost:11434/api/tags | grep -o '"name":"[^"]*"' || echo "  Not running"
-echo ""
-echo "OpenClaw:"
-openclaw status 2>/dev/null || echo "  Not running"
+pgrep -f "ollama serve" > /dev/null && echo "  Ollama: ✓ Running" || echo "  Ollama: ✗ Stopped"
+pgrep -f "openclaw gateway" > /dev/null && echo "  OpenClaw: ✓ Running" || echo "  OpenClaw: ✗ Stopped"
 SCRIPT
-chmod +x "$SCRIPT_DIR/status.sh"
+
+chmod +x "$SCRIPT_DIR"/*.sh
 
 echo -e "${GREEN}✓ Scripts ready${NC}"
 echo ""
 
 # Done!
-echo ""
 echo -e "${GREEN}╔══════════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║   ✅ INSTALLATION COMPLETE!              ║${NC}"
+echo -e "${GREEN}║   ✅ INSTALL COMPLETE!                   ║${NC}"
 echo -e "${GREEN}╚══════════════════════════════════════════╝${NC}"
 echo ""
-echo -e "${BLUE}Commands:${NC}"
-echo "  Start:  ~/openclaw/start.sh"
-echo "  Stop:   ~/openclaw/stop.sh"
-echo "  Status: ~/openclaw/status.sh"
+echo -e "${BLUE}Quick Commands:${NC}"
+echo "  ~/openclaw/start.sh    ← Start OpenClaw"
+echo "  ~/openclaw/stop.sh     ← Stop OpenClaw"
+echo "  ~/openclaw/status.sh   ← Check status"
 echo ""
 echo -e "${YELLOW}Next step:${NC}"
 echo "  Run: ~/openclaw/start.sh"
 echo ""
-echo -e "${GREEN}🎉 Selamat! OpenClaw siap dipakai!${NC}"
+echo -e "${GREEN}🎉 Done! OpenClaw siap dipakai!${NC}"
 echo ""

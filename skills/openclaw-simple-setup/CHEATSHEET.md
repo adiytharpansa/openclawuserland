@@ -1,116 +1,112 @@
-# 🚀 OpenClaw Cheat Sheet
+# 🦀 OpenClaw Cheat Sheet (UserLAnd)
 
-## Install (1x saja)
+## ⚡ Install (1x Aja!)
 
+### 🌩️ CLOUD (Recommended!)
 ```bash
-curl -fsSL https://raw.githubusercontent.com/your-repo/openclaw-simple-setup/main/INSTALL.sh | bash
+curl -fsSL https://raw.githubusercontent.com/YOUR-REPO/openclaw-simple-setup/main/INSTALL-CLOUD.sh | bash
 ```
+**1 MENIT! RAM < 500MB!** ⚡
 
-**Atau manual:**
+### 💻 LOKAL
 ```bash
-cd ~/openclaw-simple-setup
-chmod +x INSTALL.sh
-./INSTALL.sh
+curl -fsSL https://raw.githubusercontent.com/YOUR-REPO/openclaw-simple-setup/main/INSTALL.sh | bash
+```
+**5 MENIT! RAM 2-4GB**
+
+---
+
+## 📱 Workflow Harian
+
+```
+┌─────────────────────────────┐
+│  BUKA USERLAND              │
+│    ↓                        │
+│  ~/openclaw/start.sh        │
+│    ↓                        │
+│  PAKAI! (chat Telegram)     │
+│    ↓                        │
+│  ~/openclaw/stop.sh         │
+│    ↓                        │
+│  CLOSE USERLAND             │
+└─────────────────────────────┘
 ```
 
 ---
 
-## Pakai (Setiap Hari)
+## 🎯 3 Commands Penting
 
-```bash
-# 1. Start
-~/openclaw/start.sh
-
-# 2. Check
-~/openclaw/status.sh
-
-# 3. Stop (sebelum close UserLAnd)
-~/openclaw/stop.sh
-```
+| Command | Kapan? |
+|---------|--------|
+| `~/openclaw/start.sh` | Setiap buka UserLAnd |
+| `~/openclaw/status.sh` | Mau check running apa nggak |
+| `~/openclaw/stop.sh` | Sebelum close UserLAnd |
 
 ---
 
-## Commands
+## 🐛 Troubleshooting
 
-| Command | Deskripsi |
-|---------|-----------|
-| `~/openclaw/start.sh` | Start OpenClaw + Ollama |
-| `~/openclaw/stop.sh` | Stop semua |
-| `~/openclaw/status.sh` | Check status |
-| `openclaw status` | Manual status check |
-| `openclaw gateway logs` | Lihat logs |
-
----
-
-## Troubleshooting
-
-**Nggak bisa connect?**
-```bash
-~/openclaw/stop.sh
-~/openclaw/start.sh
-```
-
-**Liat logs:**
-```bash
-tail -f /tmp/ollama.log
-tail -f /tmp/openclaw.log
-```
-
-**Force stop:**
-```bash
-pkill -f ollama
-pkill -f openclaw
-```
+| Masalah | Solusi |
+|---------|--------|
+| Nggak start | `~/openclaw/stop.sh` → `~/openclaw/start.sh` |
+| Port error | `pkill -f ollama` → start lagi |
+| Out of memory | Ganti model kecil (lihat bawah) |
+| Logs? | `cat /tmp/ollama.log` |
 
 ---
 
-## Setup Telegram (Optional)
+## 🧠 Ganti Model AI
 
-1. Chat `@BotFather` di Telegram
-2. Kirim `/newbot`
-3. Simpan token
-4. Edit `~/.openclaw/config.json`:
+**Model kecil (HP kentang):**
+```bash
+ollama pull tinyllama:1.1b    # 630MB
+```
 
+**Model medium (HP biasa):**
+```bash
+ollama pull llama3.2:1b       # 1.3GB ⭐ recommended
+ollama pull qwen2.5:1.5b      # 1.5GB
+```
+
+**Edit config:**
+```bash
+nano ~/.openclaw/config.json
+```
+
+Change:
 ```json
 {
-  "telegram": {
-    "botToken": "YOUR_TOKEN"
-  }
+  "models": {"default": "ollama/NAMA_MODEL"}
 }
 ```
 
-5. Restart: `~/openclaw/stop.sh && ~/openclaw/start.sh`
+---
+
+## 📞 Setup Telegram (Recommended!)
+
+1. Buka Telegram → cari **@BotFather**
+2. Kirim: `/newbot`
+3. Kasih nama bot (bebas)
+4. Copy token yang dikasih
+5. Edit config:
+   ```bash
+   nano ~/.openclaw/telegram.json
+   ```
+6. Paste:
+   ```json
+   {"botToken": "PASTE_TOKEN_DISINI"}
+   ```
+7. Restart: `~/openclaw/stop.sh` → `~/openclaw/start.sh`
 
 ---
 
-## Ganti Model AI
+## 💡 Tips
 
-```bash
-# Liat models
-ollama list
-
-# Download model baru
-ollama pull qwen2.5:1.5b
-
-# Edit config
-nano ~/.openclaw/config.json
-
-# Change: "default": "ollama/qwen2.5:1.5b"
-
-# Restart
-~/openclaw/stop.sh
-~/openclaw/start.sh
-```
+- ✅ **Stop sebelum close UserLAnd** (biar nggak corrupt)
+- ✅ **Pakai model kecil** kalau HP lemot
+- ✅ **Telegram bot** = bisa chat dari mana aja
+- ✅ **Backup config** kalau mau aman
 
 ---
 
-## Tips
-
-- ✅ Model kecil = lebih cepat, kurang pintar
-- ✅ Model besar = lebih pintar, lebih lambat
-- ✅ Pakai Telegram bot untuk chat dari mana saja
-- ✅ Stop sebelum close UserLAnd
-
----
-
-**That's it!** Simple kan? 🎉
+**🎉 Simple kan? Nggak perlu ribet!**
